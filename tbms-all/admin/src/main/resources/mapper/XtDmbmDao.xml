@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.newoxen.springcloud.tbms.admin.dao.XtDmbmDao">
+
+    <resultMap type="com.newoxen.springcloud.tbms.admin.entity.XtDmbm" id="XtDmbmMap">
+        <result property="dmbmbs" column="DMBMBS" jdbcType="VARCHAR"/>
+        <result property="dmflbs" column="DMFLBS" jdbcType="VARCHAR"/>
+        <result property="sjdmbmbs" column="SJDMBMBS" jdbcType="VARCHAR"/>
+        <result property="dmfl" column="DMFL" jdbcType="VARCHAR"/>
+        <result property="dmbmnm" column="DMBMNM" jdbcType="VARCHAR"/>
+        <result property="dmbm" column="DMBM" jdbcType="VARCHAR"/>
+        <result property="dmbmmc" column="DMBMMC" jdbcType="VARCHAR"/>
+        <result property="xssx" column="XSSX" jdbcType="NUMERIC"/>
+        <result property="kxbz" column="KXBZ" jdbcType="VARCHAR"/>
+        <result property="yycj1" column="YYCJ1" jdbcType="VARCHAR"/>
+        <result property="yycj2" column="YYCJ2" jdbcType="VARCHAR"/>
+        <result property="yycj3" column="YYCJ3" jdbcType="VARCHAR"/>
+        <result property="yycj4" column="YYCJ4" jdbcType="VARCHAR"/>
+        <result property="yycj5" column="YYCJ5" jdbcType="VARCHAR"/>
+        <result property="dzgx1" column="DZGX1" jdbcType="VARCHAR"/>
+        <result property="dzgx2" column="DZGX2" jdbcType="VARCHAR"/>
+        <result property="dzgx3" column="DZGX3" jdbcType="VARCHAR"/>
+        <result property="cjsj" column="CJSJ" jdbcType="TIMESTAMP"/>
+        <result property="czsj" column="CZSJ" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="XtDmbmMap">
+        select
+          DMBMBS, DMFLBS, SJDMBMBS, DMFL, DMBMNM, DMBM, DMBMMC, XSSX, KXBZ, YYCJ1, YYCJ2, YYCJ3, YYCJ4, YYCJ5, DZGX1, DZGX2, DZGX3, CJSJ, CZSJ
+        from xt_dmbm
+        where DMBMBS = #{dmbmbs}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="XtDmbmMap">
+        select
+          DMBMBS, DMFLBS, SJDMBMBS, DMFL, DMBMNM, DMBM, DMBMMC, XSSX, KXBZ, YYCJ1, YYCJ2, YYCJ3, YYCJ4, YYCJ5, DZGX1, DZGX2, DZGX3, CJSJ, CZSJ
+        from xt_dmbm
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="XtDmbmMap">
+        select
+          DMBMBS, DMFLBS, SJDMBMBS, DMFL, DMBMNM, DMBM, DMBMMC, XSSX, KXBZ, YYCJ1, YYCJ2, YYCJ3, YYCJ4, YYCJ5, DZGX1, DZGX2, DZGX3, CJSJ, CZSJ
+        from xt_dmbm
+        <where>
+            <if test="dmbmbs != null and dmbmbs != ''">
+                and DMBMBS = #{dmbmbs}
+            </if>
+            <if test="dmflbs != null and dmflbs != ''">
+                and DMFLBS = #{dmflbs}
+            </if>
+            <if test="sjdmbmbs != null and sjdmbmbs != ''">
+                and SJDMBMBS = #{sjdmbmbs}
+            </if>
+            <if test="dmfl != null and dmfl != ''">
+                and DMFL = #{dmfl}
+            </if>
+            <if test="dmbmnm != null and dmbmnm != ''">
+                and DMBMNM = #{dmbmnm}
+            </if>
+            <if test="dmbm != null and dmbm != ''">
+                and DMBM = #{dmbm}
+            </if>
+            <if test="dmbmmc != null and dmbmmc != ''">
+                and DMBMMC = #{dmbmmc}
+            </if>
+            <if test="xssx != null">
+                and XSSX = #{xssx}
+            </if>
+            <if test="kxbz != null and kxbz != ''">
+                and KXBZ = #{kxbz}
+            </if>
+            <if test="yycj1 != null and yycj1 != ''">
+                and YYCJ1 = #{yycj1}
+            </if>
+            <if test="yycj2 != null and yycj2 != ''">
+                and YYCJ2 = #{yycj2}
+            </if>
+            <if test="yycj3 != null and yycj3 != ''">
+                and YYCJ3 = #{yycj3}
+            </if>
+            <if test="yycj4 != null and yycj4 != ''">
+                and YYCJ4 = #{yycj4}
+            </if>
+            <if test="yycj5 != null and yycj5 != ''">
+                and YYCJ5 = #{yycj5}
+            </if>
+            <if test="dzgx1 != null and dzgx1 != ''">
+                and DZGX1 = #{dzgx1}
+            </if>
+            <if test="dzgx2 != null and dzgx2 != ''">
+                and DZGX2 = #{dzgx2}
+            </if>
+            <if test="dzgx3 != null and dzgx3 != ''">
+                and DZGX3 = #{dzgx3}
+            </if>
+            <if test="cjsj != null">
+                and CJSJ = #{cjsj}
+            </if>
+            <if test="czsj != null">
+                and CZSJ = #{czsj}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="dmbmbs" useGeneratedKeys="true">
+        insert into xt_dmbm(DMFLBS, SJDMBMBS, DMFL, DMBMNM, DMBM, DMBMMC, XSSX, KXBZ, YYCJ1, YYCJ2, YYCJ3, YYCJ4, YYCJ5, DZGX1, DZGX2, DZGX3, CJSJ, CZSJ)
+        values (#{dmflbs}, #{sjdmbmbs}, #{dmfl}, #{dmbmnm}, #{dmbm}, #{dmbmmc}, #{xssx}, #{kxbz}, #{yycj1}, #{yycj2}, #{yycj3}, #{yycj4}, #{yycj5}, #{dzgx1}, #{dzgx2}, #{dzgx3}, #{cjsj}, #{czsj})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update xt_dmbm
+        <set>
+            <if test="dmflbs != null and dmflbs != ''">
+                DMFLBS = #{dmflbs},
+            </if>
+            <if test="sjdmbmbs != null and sjdmbmbs != ''">
+                SJDMBMBS = #{sjdmbmbs},
+            </if>
+            <if test="dmfl != null and dmfl != ''">
+                DMFL = #{dmfl},
+            </if>
+            <if test="dmbmnm != null and dmbmnm != ''">
+                DMBMNM = #{dmbmnm},
+            </if>
+            <if test="dmbm != null and dmbm != ''">
+                DMBM = #{dmbm},
+            </if>
+            <if test="dmbmmc != null and dmbmmc != ''">
+                DMBMMC = #{dmbmmc},
+            </if>
+            <if test="xssx != null">
+                XSSX = #{xssx},
+            </if>
+            <if test="kxbz != null and kxbz != ''">
+                KXBZ = #{kxbz},
+            </if>
+            <if test="yycj1 != null and yycj1 != ''">
+                YYCJ1 = #{yycj1},
+            </if>
+            <if test="yycj2 != null and yycj2 != ''">
+                YYCJ2 = #{yycj2},
+            </if>
+            <if test="yycj3 != null and yycj3 != ''">
+                YYCJ3 = #{yycj3},
+            </if>
+            <if test="yycj4 != null and yycj4 != ''">
+                YYCJ4 = #{yycj4},
+            </if>
+            <if test="yycj5 != null and yycj5 != ''">
+                YYCJ5 = #{yycj5},
+            </if>
+            <if test="dzgx1 != null and dzgx1 != ''">
+                DZGX1 = #{dzgx1},
+            </if>
+            <if test="dzgx2 != null and dzgx2 != ''">
+                DZGX2 = #{dzgx2},
+            </if>
+            <if test="dzgx3 != null and dzgx3 != ''">
+                DZGX3 = #{dzgx3},
+            </if>
+            <if test="cjsj != null">
+                CJSJ = #{cjsj},
+            </if>
+            <if test="czsj != null">
+                CZSJ = #{czsj},
+            </if>
+        </set>
+        where DMBMBS = #{dmbmbs}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from xt_dmbm where DMBMBS = #{dmbmbs}
+    </delete>
+
+</mapper>

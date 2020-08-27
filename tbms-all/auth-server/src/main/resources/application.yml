@@ -1,0 +1,60 @@
+server:
+  port: 12999
+  servlet:
+      context-path: /
+  tomcat:
+    accept-count: 1000
+    max-threads: 1000
+    max-connections: 2000
+
+
+
+spring:
+  application:
+      name: oauth2-server
+  datasource:
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/tbms?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&serverTimezone=UTC
+      username: root
+      password: Sgcc@ECP2.0
+  cloud:
+      loadbalancer:
+        ribbon:
+          enabled: false
+
+
+mybatis:
+  type-aliases-package: com.newoxen.springcloud.tbms.auth.entity
+  mapper-locations: classpath:/mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
+
+info:
+  app.name: tbms-authserver
+  company.name: www.newoxen.com
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://admin:123456@localhost:12000/eureka/eureka
+    instance:
+      instance-id: oauth-server
+      prefer-ip-address: true
+
+
+jwt:
+  key:
+    password: tbms
+    path: tbms.key
+    alias: tbms
+
+management:
+  endpoint:
+    health:
+      enabled: true

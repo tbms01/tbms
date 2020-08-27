@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="admin" />
+        <module name="admin-feign" />
+        <module name="auth-server" />
+        <module name="auth-sso-client" />
+        <module name="config" />
+        <module name="config-client" />
+        <module name="eureka" />
+        <module name="gateway" />
+        <module name="kafaka" />
+        <module name="kafakalog" />
+        <module name="monitor" />
+        <module name="monitor-client" />
+        <module name="provider-server" />
+        <module name="redismq" />
+        <module name="xxl-job-admin" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="admin" target="1.8" />
+      <module name="admin-feign" target="1.8" />
+      <module name="auth-server" target="1.8" />
+      <module name="auth-sso-client" target="1.8" />
+      <module name="config" target="1.8" />
+      <module name="config-client" target="8" />
+      <module name="eureka" target="1.8" />
+      <module name="gateway" target="1.8" />
+      <module name="kafaka" target="1.8" />
+      <module name="kafakalog" target="1.8" />
+      <module name="monitor" target="1.8" />
+      <module name="monitor-client" target="1.8" />
+      <module name="provider-server" target="1.8" />
+      <module name="redismq" target="1.8" />
+      <module name="taskcenter" target="1.8" />
+      <module name="tbms" target="1.8" />
+      <module name="xxl-job-admin" target="1.8" />
+      <module name="xxl-job-core" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="admin" options="-parameters" />
+      <module name="admin-feign" options="-parameters" />
+      <module name="auth-server" options="-parameters" />
+      <module name="auth-sso-client" options="-parameters" />
+      <module name="config" options="-parameters" />
+      <module name="eureka" options="-parameters" />
+      <module name="gateway" options="-parameters" />
+      <module name="monitor" options="-parameters" />
+    </option>
+  </component>
+</project>

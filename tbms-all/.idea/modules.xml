@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/admin/admin.iml" filepath="$PROJECT_DIR$/admin/admin.iml" group="tbms and modules" />
+      <module fileurl="file://$PROJECT_DIR$/admin-feign/admin-feign.iml" filepath="$PROJECT_DIR$/admin-feign/admin-feign.iml" group="tbms and modules" />
+      <module fileurl="file://$PROJECT_DIR$/auth-server/auth-server.iml" filepath="$PROJECT_DIR$/auth-server/auth-server.iml" group="tbms and modules" />
+      <module fileurl="file://$PROJECT_DIR$/auth-sso-client/auth-sso-client.iml" filepath="$PROJECT_DIR$/auth-sso-client/auth-sso-client.iml" group="tbms and modules" />
+      <module fileurl="file://$PROJECT_DIR$/config/config.iml" filepath="$PROJECT_DIR$/config/config.iml" group="tbms and modules" />
+      <module fileurl="file://$PROJECT_DIR$/config-client/config-client.iml" filepath="$PROJECT_DIR$/config-client/config-client.iml" group="tbms and modules" />
+      <module fileurl="file://$PROJECT_DIR$/eureka/eureka.iml" filepath="$PROJECT_DIR$/eureka/eureka.iml" group="tbms and modules" />
+      <module fileurl="file://$PROJECT_DIR$/gateway/gateway.iml" filepath="$PROJECT_DIR$/gateway/gateway.iml" group="tbms and modules" />
+      <module fileurl="file://$PROJECT_DIR$/kafakalog/kafakalog.iml" filepath="$PROJECT_DIR$/kafakalog/kafakalog.iml" />
+      <module fileurl="file://$PROJECT_DIR$/monitor/monitor.iml" filepath="$PROJECT_DIR$/monitor/monitor.iml" group="tbms and modules" />
+      <module fileurl="file://$PROJECT_DIR$/tbms.iml" filepath="$PROJECT_DIR$/tbms.iml" group="tbms and modules" />
+      <module fileurl="file://$PROJECT_DIR$/xxl-job-admin/xxl-job-admin.iml" filepath="$PROJECT_DIR$/xxl-job-admin/xxl-job-admin.iml" group="tbms and modules" />
+    </modules>
+  </component>
+</project>

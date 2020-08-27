@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.newoxen.springcloud.tbms.admin.dao.XtGwjsgxDao">
+
+    <resultMap type="com.newoxen.springcloud.tbms.admin.entity.XtGwjsgx" id="XtGwjsgxMap">
+        <result property="gwbh" column="GWBH" jdbcType="VARCHAR"/>
+        <result property="jsbh" column="JSBH" jdbcType="VARCHAR"/>
+        <result property="cjrbh" column="CJRBH" jdbcType="VARCHAR"/>
+        <result property="cjsj" column="CJSJ" jdbcType="INTEGER"/>
+        <result property="czrbh" column="CZRBH" jdbcType="VARCHAR"/>
+        <result property="czsj" column="CZSJ" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <resultMap type="com.newoxen.springcloud.tbms.admin.entity.XtGnxx" id="XtGnxxMap">
+        <result property="appid" column="appid" jdbcType="VARCHAR"/>
+        <result property="gnbh" column="gnbh" jdbcType="VARCHAR"/>
+        <result property="sjgnbh" column="sjgnbh" jdbcType="VARCHAR"/>
+        <result property="gnmc" column="gnmc" jdbcType="VARCHAR"/>
+        <result property="ssxt" column="ssxt" jdbcType="VARCHAR"/>
+        <result property="gnms" column="gnms" jdbcType="VARCHAR"/>
+        <result property="ysid" column="ysid" jdbcType="VARCHAR"/>
+        <result property="gnljdz" column="gnljdz" jdbcType="VARCHAR"/>
+        <result property="ljdzfjcs" column="ljdzfjcs" jdbcType="VARCHAR"/>
+        <result property="gnljfsdm" column="gnljfsdm" jdbcType="VARCHAR"/>
+        <result property="gnlxdm" column="gnlxdm" jdbcType="VARCHAR"/>
+        <result property="gnytdm" column="gnytdm" jdbcType="VARCHAR"/>
+        <result property="gntblmc" column="gntblmc" jdbcType="VARCHAR"/>
+        <result property="gntbljdz" column="gntbljdz" jdbcType="VARCHAR"/>
+        <result property="gnbbh" column="gnbbh" jdbcType="VARCHAR"/>
+        <result property="djmksxh" column="djmksxh" jdbcType="INTEGER"/>
+        <result property="mksxh" column="mksxh" jdbcType="INTEGER"/>
+        <result property="gnsxh" column="gnsxh" jdbcType="INTEGER"/>
+        <result property="czsxh" column="czsxh" jdbcType="INTEGER"/>
+        <result property="ycbz" column="ycbz" jdbcType="VARCHAR"/>
+        <result property="gnztdm" column="gnztdm" jdbcType="VARCHAR"/>
+        <result property="ztbgsj" column="ztbgsj" jdbcType="INTEGER"/>
+        <result property="cjrbh" column="cjrbh" jdbcType="VARCHAR"/>
+        <result property="cjsj" column="cjsj" jdbcType="INTEGER"/>
+        <result property="czrbh" column="czrbh" jdbcType="VARCHAR"/>
+        <result property="czsj" column="czsj" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <resultMap type="com.newoxen.springcloud.tbms.admin.entity.XtJsxx" id="XtJsxxMap">
+        <result property="jsbh" column="jsbh" jdbcType="VARCHAR"/>
+        <result property="jsbz" column="jsbz" jdbcType="VARCHAR"/>
+        <result property="sjjsbh" column="sjjsbh" jdbcType="VARCHAR"/>
+        <result property="ssxt" column="ssxt" jdbcType="VARCHAR"/>
+        <result property="jsmc" column="jsmc" jdbcType="VARCHAR"/>
+        <result property="jsms" column="jsms" jdbcType="VARCHAR"/>
+        <result property="jsytdm" column="jsytdm" jdbcType="VARCHAR"/>
+        <result property="ztbgsj" column="ztbgsj" jdbcType="INTEGER"/>
+        <result property="cjrbh" column="cjrbh" jdbcType="VARCHAR"/>
+        <result property="jsztdm" column="jsztdm" jdbcType="VARCHAR"/>
+        <result property="cjsj" column="cjsj" jdbcType="INTEGER"/>
+        <result property="czrbh" column="czrbh" jdbcType="VARCHAR"/>
+        <result property="czsj" column="czsj" jdbcType="INTEGER"/>
+    </resultMap>
+
+
+    <!--***查询用户具备权限功能菜单所有下级-->
+    <select id="queryApplication" resultMap="XtGnxxMap">
+        select
+        appid, gnbh, sjgnbh, gnmc, ssxt, gnms, ysid, gnljdz, ljdzfjcs, gnljfsdm, gnlxdm, gnytdm, gntblmc, gntbljdz, gnbbh, djmksxh, mksxh, gnsxh, czsxh, ycbz, gnztdm, ztbgsj, cjrbh, cjsj, czrbh, czsj
+        from xt_gnxx
+        where  sjgnbh='0' and gnbh in (
+          select DISTINCT gnbh from xt_jsgngx where jsbh in (
+            select DISTINCT jsbh from xt_gwjsgx where gwbh = #{gwbh}
+          )
+        )
+        order by ssxt, mksxh, gnsxh
+    </select>
+
+    <!--***查询用户具备权限功能菜单所有下级-->
+    <select id="queryFuncAllChildren" resultMap="XtGnxxMap">
+        select
+            appid, gnbh, sjgnbh, gnmc, ssxt, gnms, ysid, gnljdz, ljdzfjcs, gnljfsdm, gnlxdm, gnytdm, gntblmc, gntbljdz, gnbbh, djmksxh, mksxh, gnsxh, czsxh, ycbz, gnztdm, ztbgsj, cjrbh, cjsj, czrbh, czsj
+        from xt_gnxx
+        where  FIND_IN_SET(gnbh, getChildList(#{sjgnbh})) and gnbh in (
+          select DISTINCT gnbh from xt_jsgngx where jsbh in (
+            select DISTINCT jsbh from xt_gwjsgx where gwbh = #{gwbh}
+          )
+        )
+        order by ssxt, mksxh, gnsxh
+    </select>
+
+
+    <!--***查询岗位对应全部功能-->
+    <select id="queryAllFuncsByPosition" resultMap="XtGnxxMap">
+        select
+        appid, gnbh, sjgnbh, gnmc, ssxt, gnms, ysid, gnljdz, ljdzfjcs, gnljfsdm, gnlxdm, gnytdm, gntblmc, gntbljdz, gnbbh, djmksxh, mksxh, gnsxh, czsxh, ycbz, gnztdm, ztbgsj, cjrbh, cjsj, czrbh, czsj
+        from xt_gnxx
+        where gnbh in (
+          select DISTINCT GNBH from xt_jsgngx where JSBH in (
+            select JSBH from xt_gwjsgx where GWBH = #{gwbh}
+          )
+        <if test="jsbh != null and jsbh != ''">
+            and jsbh = #{jsbh}
+        </if>
+        )
+    </select>
+
+    <!--***查询角色不包含的全部功能-->
+    <select id="queryAllFuncsByRoleNo" resultMap="XtGnxxMap">
+        select
+            appid, gnbh, sjgnbh, gnmc, ssxt, gnms, ysid, gnljdz, ljdzfjcs, gnljfsdm, gnlxdm, gnytdm, gntblmc, gntbljdz, gnbbh, djmksxh, mksxh, gnsxh, czsxh, ycbz, gnztdm, ztbgsj, cjrbh, cjsj, czrbh, czsj
+        from xt_gnxx
+        where gnbh not in (
+            select DISTINCT GNBH from xt_jsgngx where jsbh = #{jsbh}
+        )
+    </select>
+
+
+    <!--***查询岗位对应全部角色-->
+    <select id="queryAllRolesByPosition" resultMap="XtJsxxMap">
+        select
+          jsbh, jsbz, sjjsbh, ssxt, jsmc, jsms, jsytdm, ztbgsj, cjrbh, jsztdm, cjsj, czrbh, czsj
+        from xt_jsxx
+        where jsbh in (
+            select JSBH from xt_gwjsgx where GWBH = #{gwbh}
+        )
+    </select>
+
+
+    <!--***查询不属于该岗位的全部角色-->
+    <select id="queryAllRolesByPositionNo" resultMap="XtJsxxMap">
+        select
+          jsbh, jsbz, sjjsbh, ssxt, jsmc, jsms, jsytdm, ztbgsj, cjrbh, jsztdm, cjsj, czrbh, czsj
+        from xt_jsxx
+        where jsbh not in (
+            select JSBH from xt_gwjsgx where GWBH = #{gwbh}
+        )
+    </select>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="XtGwjsgxMap">
+        select
+          GWBH, JSBH, CJRBH, CJSJ, CZRBH, CZSJ
+        from xt_gwjsgx
+        where GWBH = #{gwbh}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="XtGwjsgxMap">
+        select
+          GWBH, JSBH, CJRBH, CJSJ, CZRBH, CZSJ
+        from xt_gwjsgx
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="XtGwjsgxMap">
+        select
+          GWBH, JSBH, CJRBH, CJSJ, CZRBH, CZSJ
+        from xt_gwjsgx
+        <where>
+            <if test="gwbh != null and gwbh != ''">
+                and GWBH = #{gwbh}
+            </if>
+            <if test="jsbh != null and jsbh != ''">
+                and JSBH = #{jsbh}
+            </if>
+            <if test="cjrbh != null and cjrbh != ''">
+                and CJRBH = #{cjrbh}
+            </if>
+            <if test="cjsj != null">
+                and CJSJ = #{cjsj}
+            </if>
+            <if test="czrbh != null and czrbh != ''">
+                and CZRBH = #{czrbh}
+            </if>
+            <if test="czsj != null">
+                and CZSJ = #{czsj}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" parameterType="java.util.List">
+        insert into xt_gwjsgx(GWBH, JSBH, CZRBH, CZSJ)
+        values
+            <foreach collection="list" item="gwjsgx" separator="," close=";">
+                (#{gwjsgx.gwbh},#{gwjsgx.jsbh},#{gwjsgx.czrbh}),#{gwjsgx.czsj}
+            </foreach>
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update xt_gwjsgx
+        <set>
+            <if test="cjrbh != null and cjrbh != ''">
+                CJRBH = #{cjrbh},
+            </if>
+            <if test="cjsj != null">
+                CJSJ = #{cjsj},
+            </if>
+            <if test="czrbh != null and czrbh != ''">
+                CZRBH = #{czrbh},
+            </if>
+            <if test="czsj != null">
+                CZSJ = #{czsj},
+            </if>
+        </set>
+        where GWBH = #{gwbh}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from xt_gwjsgx where GWBH = #{gwbh}
+    </delete>
+
+    <!--通过岗位名称和角色名称删除-->
+    <delete id="deletePositionRole">
+        delete from xt_gwjsgx where GWBH = #{gwbh} and JSBH = #{jsbh}
+    </delete>
+
+</mapper>

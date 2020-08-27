@@ -1,0 +1,12 @@
+server:
+  port: 12997
+
+spring:
+  application:
+    name: monitor-server
+
+info:
+  app.name: tbms-monitor
+  company.name: www.newoxen.com
+
+

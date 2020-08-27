@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.newoxen.springcloud.tbms.admin.dao.XtBlzDao">
+
+    <resultMap type="com.newoxen.springcloud.tbms.admin.entity.XtBlz" id="XtBlzMap">
+        <result property="bmc" column="bmc" jdbcType="VARCHAR"/>
+        <result property="lmc" column="lmc" jdbcType="VARCHAR"/>
+        <result property="dqz" column="dqz" jdbcType="INTEGER"/>
+        <result property="qzlsh" column="qzlsh" jdbcType="INTEGER"/>
+        <result property="dqbm" column="dqbm" jdbcType="VARCHAR"/>
+        <result property="cjrbh" column="cjrbh" jdbcType="VARCHAR"/>
+        <result property="cjsj" column="cjsj" jdbcType="INTEGER"/>
+        <result property="czrbh" column="czrbh" jdbcType="VARCHAR"/>
+        <result property="czsj" column="czsj" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="XtBlzMap">
+        select
+          bmc, lmc, dqz, qzlsh, dqbm, cjrbh, cjsj, czrbh, czsj
+        from xt_blz
+        where bmc = #{bmc}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="XtBlzMap">
+        select
+          bmc, lmc, dqz, qzlsh, dqbm, cjrbh, cjsj, czrbh, czsj
+        from xt_blz
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="XtBlzMap">
+        select
+          bmc, lmc, dqz, qzlsh, dqbm, cjrbh, cjsj, czrbh, czsj
+        from xt_blz
+        <where>
+            <if test="bmc != null and bmc != ''">
+                and bmc = #{bmc}
+            </if>
+            <if test="lmc != null and lmc != ''">
+                and lmc = #{lmc}
+            </if>
+            <if test="dqz != null">
+                and dqz = #{dqz}
+            </if>
+            <if test="qzlsh != null">
+                and qzlsh = #{qzlsh}
+            </if>
+            <if test="dqbm != null and dqbm != ''">
+                and dqbm = #{dqbm}
+            </if>
+            <if test="cjrbh != null and cjrbh != ''">
+                and cjrbh = #{cjrbh}
+            </if>
+            <if test="cjsj != null">
+                and cjsj = #{cjsj}
+            </if>
+            <if test="czrbh != null and czrbh != ''">
+                and czrbh = #{czrbh}
+            </if>
+            <if test="czsj != null">
+                and czsj = #{czsj}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="bmc" useGeneratedKeys="true">
+        insert into xt_blz(dqz, qzlsh, dqbm, cjrbh, cjsj, czrbh, czsj)
+        values (#{dqz}, #{qzlsh}, #{dqbm}, #{cjrbh}, #{cjsj}, #{czrbh}, #{czsj})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update xt_blz
+        <set>
+            <if test="dqz != null">
+                dqz = #{dqz},
+            </if>
+            <if test="qzlsh != null">
+                qzlsh = #{qzlsh},
+            </if>
+            <if test="dqbm != null and dqbm != ''">
+                dqbm = #{dqbm},
+            </if>
+            <if test="cjrbh != null and cjrbh != ''">
+                cjrbh = #{cjrbh},
+            </if>
+            <if test="cjsj != null">
+                cjsj = #{cjsj},
+            </if>
+            <if test="czrbh != null and czrbh != ''">
+                czrbh = #{czrbh},
+            </if>
+            <if test="czsj != null">
+                czsj = #{czsj},
+            </if>
+        </set>
+        where bmc = #{bmc}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from xt_blz where bmc = #{bmc}
+    </delete>
+
+</mapper>

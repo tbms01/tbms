@@ -1,0 +1,18 @@
+
+server:
+  port: 12092
+
+
+spring:
+  kafka:
+    bootstrap-servers: 127.0.0.1:9092
+    producer:
+      acks: 1
+      retries: 0
+      batch-size: 16384
+      buffer-memory: 33554432
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    consumer:
+      isolation-level: read_committed
+      group-id: kafka-log-listener

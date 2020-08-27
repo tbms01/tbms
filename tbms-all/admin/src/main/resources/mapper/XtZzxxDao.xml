@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.newoxen.springcloud.tbms.admin.dao.XtZzxxDao">
+
+    <resultMap type="com.newoxen.springcloud.tbms.admin.entity.XtZzxx" id="XtZzxxMap">
+        <result property="zzbm" column="zzbm" jdbcType="VARCHAR"/>
+        <result property="zzmc" column="zzmc" jdbcType="VARCHAR"/>
+        <result property="zzjc" column="zzjc" jdbcType="VARCHAR"/>
+        <result property="zzdz" column="zzdz" jdbcType="VARCHAR"/>
+        <result property="jyxtbh" column="jyxtbh" jdbcType="VARCHAR"/>
+        <result property="sjzzbm" column="sjzzbm" jdbcType="VARCHAR"/>
+        <result property="ssdwbm" column="ssdwbm" jdbcType="VARCHAR"/>
+        <result property="dwbz" column="dwbz" jdbcType="VARCHAR"/>
+        <result property="sgjsbz" column="sgjsbz" jdbcType="VARCHAR"/>
+        <result property="bgdhhm" column="bgdhhm" jdbcType="VARCHAR"/>
+        <result property="czhm" column="czhm" jdbcType="VARCHAR"/>
+        <result property="xssxh" column="xssxh" jdbcType="INTEGER"/>
+        <result property="zzztdm" column="zzztdm" jdbcType="VARCHAR"/>
+        <result property="ztbgsj" column="ztbgsj" jdbcType="INTEGER"/>
+        <result property="cjrbh" column="cjrbh" jdbcType="VARCHAR"/>
+        <result property="cjsj" column="cjsj" jdbcType="INTEGER"/>
+        <result property="czrbh" column="czrbh" jdbcType="VARCHAR"/>
+        <result property="czsj" column="czsj" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <resultMap type="com.newoxen.springcloud.tbms.admin.entity.XtZzxxExtend" id="XtZzxxExtendMap">
+        <result property="zzbm" column="zzbm" jdbcType="VARCHAR"/>
+        <result property="zzmc" column="zzmc" jdbcType="VARCHAR"/>
+        <result property="zzjc" column="zzjc" jdbcType="VARCHAR"/>
+        <result property="zzdz" column="zzdz" jdbcType="VARCHAR"/>
+        <result property="jyxtbh" column="jyxtbh" jdbcType="VARCHAR"/>
+        <result property="sjzzbm" column="sjzzbm" jdbcType="VARCHAR"/>
+        <result property="ssdwbm" column="ssdwbm" jdbcType="VARCHAR"/>
+        <result property="dwbz" column="dwbz" jdbcType="VARCHAR"/>
+        <result property="sgjsbz" column="sgjsbz" jdbcType="VARCHAR"/>
+        <result property="dwbzmc" column="dwbzmc" jdbcType="VARCHAR"/>
+        <result property="sgjsbzmc" column="sgjsbzmc" jdbcType="VARCHAR"/>
+        <result property="bgdhhm" column="bgdhhm" jdbcType="VARCHAR"/>
+        <result property="czhm" column="czhm" jdbcType="VARCHAR"/>
+        <result property="xssxh" column="xssxh" jdbcType="INTEGER"/>
+        <result property="zzztdm" column="zzztdm" jdbcType="VARCHAR"/>
+        <result property="zzztdmmc" column="zzztdmmc" jdbcType="VARCHAR"/>
+        <result property="ztbgsj" column="ztbgsj" jdbcType="INTEGER"/>
+        <result property="cjrbh" column="cjrbh" jdbcType="VARCHAR"/>
+        <result property="cjsj" column="cjsj" jdbcType="INTEGER"/>
+        <result property="czrbh" column="czrbh" jdbcType="VARCHAR"/>
+        <result property="czsj" column="czsj" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="common_column">
+        zzbm,
+        zzmc,
+        zzjc,
+        zzdz,
+        jyxtbh,
+        sjzzbm,
+        ssdwbm,
+        dwbz,
+        case dwbz when 0 then '单位' when 1 then '部门' else dwbz end as dwbzmc,
+        sgjsbz,
+        case sgjsbz when 0 then '否' when 1 then '是' else sgjsbz end as sgjsbzmc,
+        bgdhhm,
+        czhm,
+        xssxh,
+        case zzztdm when 1 then '正常' when 0 then '停用' when 2 then '锁定' else zzztdm end as zzztdmmc,
+        ztbgsj,
+        cjrbh,
+        cjsj,
+        czrbh,
+        czsj
+    </sql>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="XtZzxxMap">
+        select
+          zzbm, zzmc, zzjc, zzdz, jyxtbh, sjzzbm, ssdwbm, dwbz, sgjsbz, bgdhhm, czhm, xssxh, zzztdm, ztbgsj, cjrbh, cjsj, czrbh, czsj
+        from tbms.xt_zzxx
+        where zzbm = #{zzbm}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="XtZzxxMap">
+        select
+          zzbm, zzmc, zzjc, zzdz, jyxtbh, sjzzbm, ssdwbm, dwbz, sgjsbz, bgdhhm, czhm, xssxh, zzztdm, ztbgsj, cjrbh, cjsj, czrbh, czsj
+        from tbms.xt_zzxx
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--查询所有组织-->
+    <select id="queryAllOrg" resultMap="XtZzxxMap">
+        select
+          zzbm, zzmc, zzjc, zzdz, jyxtbh, sjzzbm, ssdwbm, dwbz, sgjsbz, bgdhhm, czhm, xssxh, zzztdm, ztbgsj, cjrbh, cjsj, czrbh, czsj
+        from xt_zzxx
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="XtZzxxMap">
+        select
+          zzbm, zzmc, zzjc, zzdz, jyxtbh, sjzzbm, ssdwbm, dwbz, sgjsbz, bgdhhm, czhm, xssxh, zzztdm, ztbgsj, cjrbh, cjsj, czrbh, czsj
+        from tbms.xt_zzxx
+        <where>
+            <if test="zzbm != null and zzbm != ''">
+                and zzbm = #{zzbm}
+            </if>
+            <if test="zzmc != null and zzmc != ''">
+                and zzmc = #{zzmc}
+            </if>
+            <if test="zzjc != null and zzjc != ''">
+                and zzjc = #{zzjc}
+            </if>
+            <if test="zzdz != null and zzdz != ''">
+                and zzdz = #{zzdz}
+            </if>
+            <if test="jyxtbh != null and jyxtbh != ''">
+                and jyxtbh = #{jyxtbh}
+            </if>
+            <if test="sjzzbm != null and sjzzbm != ''">
+                and sjzzbm = #{sjzzbm}
+            </if>
+            <if test="ssdwbm != null and ssdwbm != ''">
+                and ssdwbm = #{ssdwbm}
+            </if>
+            <if test="dwbz != null and dwbz != ''">
+                and dwbz = #{dwbz}
+            </if>
+            <if test="sgjsbz != null and sgjsbz != ''">
+                and sgjsbz = #{sgjsbz}
+            </if>
+            <if test="bgdhhm != null and bgdhhm != ''">
+                and bgdhhm = #{bgdhhm}
+            </if>
+            <if test="czhm != null and czhm != ''">
+                and czhm = #{czhm}
+            </if>
+            <if test="xssxh != null">
+                and xssxh = #{xssxh}
+            </if>
+            <if test="zzztdm != null and zzztdm != ''">
+                and zzztdm = #{zzztdm}
+            </if>
+            <if test="ztbgsj != null">
+                and ztbgsj = #{ztbgsj}
+            </if>
+            <if test="cjrbh != null and cjrbh != ''">
+                and cjrbh = #{cjrbh}
+            </if>
+            <if test="cjsj != null">
+                and cjsj = #{cjsj}
+            </if>
+            <if test="czrbh != null and czrbh != ''">
+                and czrbh = #{czrbh}
+            </if>
+            <if test="czsj != null">
+                and czsj = #{czsj}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="zzbm" useGeneratedKeys="true">
+        insert into tbms.xt_zzxx(zzbm,zzmc, zzjc, zzdz, jyxtbh, sjzzbm, ssdwbm, dwbz, sgjsbz, bgdhhm, czhm, xssxh, zzztdm, ztbgsj, cjrbh, cjsj, czrbh, czsj)
+        values (#{zzbm},#{zzmc}, #{zzjc}, #{zzdz}, #{jyxtbh}, #{sjzzbm}, #{ssdwbm}, #{dwbz}, #{sgjsbz}, #{bgdhhm}, #{czhm}, #{xssxh}, #{zzztdm}, #{ztbgsj}, #{cjrbh}, #{cjsj}, #{czrbh}, #{czsj})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update tbms.xt_zzxx
+        <set>
+            <if test="zzmc != null and zzmc != ''">
+                zzmc = #{zzmc},
+            </if>
+            <if test="zzjc != null and zzjc != ''">
+                zzjc = #{zzjc},
+            </if>
+            <if test="zzdz != null and zzdz != ''">
+                zzdz = #{zzdz},
+            </if>
+            <if test="jyxtbh != null and jyxtbh != ''">
+                jyxtbh = #{jyxtbh},
+            </if>
+            <if test="sjzzbm != null and sjzzbm != ''">
+                sjzzbm = #{sjzzbm},
+            </if>
+            <if test="ssdwbm != null and ssdwbm != ''">
+                ssdwbm = #{ssdwbm},
+            </if>
+            <if test="dwbz != null and dwbz != ''">
+                dwbz = #{dwbz},
+            </if>
+            <if test="sgjsbz != null and sgjsbz != ''">
+                sgjsbz = #{sgjsbz},
+            </if>
+            <if test="bgdhhm != null and bgdhhm != ''">
+                bgdhhm = #{bgdhhm},
+            </if>
+            <if test="czhm != null and czhm != ''">
+                czhm = #{czhm},
+            </if>
+            <if test="xssxh != null">
+                xssxh = #{xssxh},
+            </if>
+            <if test="zzztdm != null and zzztdm != ''">
+                zzztdm = #{zzztdm},
+            </if>
+            <if test="ztbgsj != null">
+                ztbgsj = #{ztbgsj},
+            </if>
+            <if test="cjrbh != null and cjrbh != ''">
+                cjrbh = #{cjrbh},
+            </if>
+            <if test="cjsj != null">
+                cjsj = #{cjsj},
+            </if>
+            <if test="czrbh != null and czrbh != ''">
+                czrbh = #{czrbh},
+            </if>
+            <if test="czsj != null">
+                czsj = #{czsj},
+            </if>
+        </set>
+        where zzbm = #{zzbm}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from tbms.xt_zzxx where zzbm = #{zzbm}
+    </delete>
+
+    <!--根据关键字过滤查询-->
+    <select id="queryAllByFilter" resultMap="XtZzxxExtendMap">
+        select
+        <include refid="common_column"/>
+        from xt_zzxx
+        <where>
+            1 = 1
+            <if test="findtext != null and findtext != ''">
+                and (
+                zzmc LIKE CONCAT('%','${findtext}','%') or
+                zzjc LIKE CONCAT('%','${findtext}','%')
+                )
+            </if>
+        </where>
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--根据关键字过滤查询-->
+    <select id="queryAllByFilterCount" resultType="java.lang.Integer">
+        select
+        count(*)
+        from xt_zzxx
+        <where>
+            1 = 1
+            <if test="findtext != null and findtext != ''">
+                and (
+                zzmc LIKE CONCAT('%','${findtext}','%') or
+                zzjc LIKE CONCAT('%','${findtext}','%')
+                )
+            </if>
+        </where>
+    </select>
+
+    <!--根据父级过滤查询-->
+    <select id="queryAllByFather" resultMap="XtZzxxExtendMap">
+        select
+        <include refid="common_column"/>
+        from xt_zzxx
+        <where>
+            1 = 1
+            <if test="sjzzbm != null and sjzzbm != ''">
+                and sjzzbm = '${sjzzbm}'
+            </if>
+        </where>
+    </select>
+
+    <!--根据父级过滤查询-->
+    <select id="queryAllByFatherPager" resultMap="XtZzxxExtendMap">
+        select
+        <include refid="common_column"/>
+        from xt_zzxx
+        <where>
+            1 = 1
+            <if test="sjzzbm != null and sjzzbm != ''">
+                and sjzzbm = '${sjzzbm}'
+            </if>
+        </where>
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--根据父级过滤查询-->
+    <select id="queryAllByFatherPagerCount" resultType="java.lang.Integer">
+        select
+        count(*)
+        from xt_zzxx
+        <where>
+            1 = 1
+            <if test="sjzzbm != null and sjzzbm != ''">
+                and sjzzbm = '${sjzzbm}'
+            </if>
+        </where>
+    </select>
+</mapper>

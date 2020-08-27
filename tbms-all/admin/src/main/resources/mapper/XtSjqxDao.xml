@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.newoxen.springcloud.tbms.admin.dao.XtSjqxDao">
+
+    <resultMap type="com.newoxen.springcloud.tbms.admin.entity.XtSjqx" id="XtSjqxMap">
+        <result property="appid" column="appid" jdbcType="VARCHAR"/>
+        <result property="dataset" column="dataset" jdbcType="VARCHAR"/>
+        <result property="jgbh" column="jgbh" jdbcType="VARCHAR"/>
+        <result property="gwbh" column="gwbh" jdbcType="VARCHAR"/>
+        <result property="jsbh" column="jsbh" jdbcType="VARCHAR"/>
+        <result property="czybh" column="czybh" jdbcType="VARCHAR"/>
+        <result property="gltj" column="gltj" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="XtSjqxMap">
+        select
+          appid, dataset, jgbh, gwbh, jsbh, czybh, gltj
+        from xt_sjqx
+        where appid = #{appid}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="XtSjqxMap">
+        select
+          appid, dataset, jgbh, gwbh, jsbh, czybh, gltj
+        from xt_sjqx
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="XtSjqxMap">
+        select
+          appid, dataset, jgbh, gwbh, jsbh, czybh, gltj
+        from xt_sjqx
+        <where>
+            <if test="appid != null and appid != ''">
+                and appid = #{appid}
+            </if>
+            <if test="dataset != null and dataset != ''">
+                and dataset = #{dataset}
+            </if>
+            <if test="jgbh != null and jgbh != ''">
+                and jgbh = #{jgbh}
+            </if>
+            <if test="gwbh != null and gwbh != ''">
+                and gwbh = #{gwbh}
+            </if>
+            <if test="jsbh != null and jsbh != ''">
+                and jsbh = #{jsbh}
+            </if>
+            <if test="czybh != null and czybh != ''">
+                and czybh = #{czybh}
+            </if>
+            <if test="gltj != null and gltj != ''">
+                and gltj = #{gltj}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="appid" useGeneratedKeys="true">
+        insert into xt_sjqx(dataset, jgbh, gwbh, jsbh, czybh, gltj)
+        values (#{dataset}, #{jgbh}, #{gwbh}, #{jsbh}, #{czybh}, #{gltj})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update xt_sjqx
+        <set>
+            <if test="dataset != null and dataset != ''">
+                dataset = #{dataset},
+            </if>
+            <if test="jgbh != null and jgbh != ''">
+                jgbh = #{jgbh},
+            </if>
+            <if test="gwbh != null and gwbh != ''">
+                gwbh = #{gwbh},
+            </if>
+            <if test="jsbh != null and jsbh != ''">
+                jsbh = #{jsbh},
+            </if>
+            <if test="czybh != null and czybh != ''">
+                czybh = #{czybh},
+            </if>
+            <if test="gltj != null and gltj != ''">
+                gltj = #{gltj},
+            </if>
+        </set>
+        where appid = #{appid}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from xt_sjqx where appid = #{appid}
+    </delete>
+
+</mapper>

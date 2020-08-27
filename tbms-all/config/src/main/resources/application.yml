@@ -1,0 +1,25 @@
+server:
+  port: 12777
+
+spring:
+  application:
+    name: config-server
+  profiles:
+    active: dev
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/tbms01/tbms
+          search-paths: config
+          username: tbms01
+          password: newoxen2020
+          default-label: master
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://admin:123456@localhost:12000/eureka/eureka
+    instance:
+      instance-id: config-server
+      prefer-ip-address: true

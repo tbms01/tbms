@@ -1,0 +1,56 @@
+server:
+   port: 12002
+
+spring:
+  application:
+    name: admin-feign-service
+  security:
+      user:
+        name: admin
+        password: 123456
+  redis:
+    host: localhost
+    port: 32768
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+info:
+  app.name: tbms-admin-feign
+  company.name: www.newoxen.com
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://admin:123456@localhost:12000/eureka/eureka
+    instance:
+      instance-id: admin-feign
+      prefer-ip-address: true
+
+feign:
+  hystrix:
+    enabled: true
+    command:
+      default:
+        execution:
+          isolation:
+            strategy: #默认是THREAD,这里演示改成了信号量隔离模式
+              semaphore:
+                maxConcurrentRequests: 3
+
+oauth2-service-url: http://localhost:12999
+security:
+  oauth2:
+    client:
+      user-authorization-uri: ${oauth2-service-url}/oauth/authorize
+      access-token-uri: ${oauth2-service-url}/oauth/token
+    resource:
+      user-info-uri: ${oauth2-service-url}/oauth/user
+      prefer-token-info: false
+
+logging:
+  level:
+    org.springframework.cloud.openfeign: debug

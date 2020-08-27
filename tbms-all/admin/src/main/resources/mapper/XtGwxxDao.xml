@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.newoxen.springcloud.tbms.admin.dao.XtGwxxDao">
+
+    <resultMap type="com.newoxen.springcloud.tbms.admin.entity.XtGwxx" id="XtGwxxMap">
+        <result property="gwbh" column="gwbh" jdbcType="VARCHAR"/>
+        <result property="zzbm" column="zzbm" jdbcType="VARCHAR"/>
+        <result property="zzmc" column="zzmc" jdbcType="VARCHAR"/>
+        <result property="gwmc" column="gwmc" jdbcType="VARCHAR"/>
+        <result property="gwms" column="gwms" jdbcType="VARCHAR"/>
+        <result property="gwytdm" column="gwytdm" jdbcType="VARCHAR"/>
+        <result property="gwztdm" column="gwztdm" jdbcType="VARCHAR"/>
+        <result property="ztbgsj" column="ztbgsj" jdbcType="INTEGER"/>
+        <result property="cjrbh" column="cjrbh" jdbcType="VARCHAR"/>
+        <result property="cjsj" column="cjsj" jdbcType="INTEGER"/>
+        <result property="czrbh" column="czrbh" jdbcType="VARCHAR"/>
+        <result property="czsj" column="czsj" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="XtGwxxMap">
+        select
+          gwbh,
+          (select zzmc from xt_zzxx WHERE zzbm=xt_gwxx.zzbm limit 1) zzmc, zzbm,
+          zzbm, gwmc, gwms, gwytdm, gwztdm, ztbgsj, cjrbh, cjsj, czrbh, czsj
+        from xt_gwxx
+        where gwbh = #{gwbh}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="XtGwxxMap">
+        select
+          gwbh,
+          (select zzmc from xt_zzxx WHERE zzbm=xt_gwxx.zzbm limit 1) zzmc, zzbm,
+          zzbm, gwmc, gwms, gwytdm, gwztdm, ztbgsj, cjrbh, cjsj, czrbh, czsj
+        from xt_gwxx
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--查询所有组织-->
+    <select id="queryAllId" resultMap="XtGwxxMap">
+        select
+          gwbh,
+           (select zzmc from xt_zzxx WHERE zzbm=xt_gwxx.zzbm limit 1) zzmc, zzbm,
+           zzbm, gwmc, gwms, gwytdm, gwztdm, ztbgsj, cjrbh, cjsj, czrbh, czsj
+        from xt_gwxx
+    </select>
+
+    <!--查询数据表总数据-->
+    <select id="queryCount" resultType="java.lang.Integer">
+        select
+        count(*)
+        from xt_gwxx
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="XtGwxxMap">
+        select
+          gwbh,
+        (select zzmc from xt_zzxx WHERE zzbm=xt_gwxx.zzbm limit 1) zzmc, zzbm,
+          zzbm, gwmc, gwms, gwytdm, gwztdm, ztbgsj, cjrbh, cjsj, czrbh, czsj
+        from xt_gwxx
+        <where>
+            <if test="gwbh != null and gwbh != ''">
+                and gwbh = #{gwbh}
+            </if>
+            <if test="zzbm != null and zzbm != ''">
+                and zzbm = #{zzbm}
+            </if>
+            <if test="zzmc != null and zzmc != ''">
+                and zzmc = #{zzmc}
+            </if>
+            <if test="gwmc != null and gwmc != ''">
+                and gwmc = #{gwmc}
+            </if>
+            <if test="gwms != null and gwms != ''">
+                and gwms = #{gwms}
+            </if>
+            <if test="gwytdm != null and gwytdm != ''">
+                and gwytdm = #{gwytdm}
+            </if>
+            <if test="gwztdm != null and gwztdm != ''">
+                and gwztdm = #{gwztdm}
+            </if>
+            <if test="ztbgsj != null">
+                and ztbgsj = #{ztbgsj}
+            </if>
+            <if test="cjrbh != null and cjrbh != ''">
+                and cjrbh = #{cjrbh}
+            </if>
+            <if test="cjsj != null">
+                and cjsj = #{cjsj}
+            </if>
+            <if test="czrbh != null and czrbh != ''">
+                and czrbh = #{czrbh}
+            </if>
+            <if test="czsj != null">
+                and czsj = #{czsj}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert">
+        insert into xt_gwxx(gwbh,zzbm, gwmc, gwms, gwytdm, gwztdm, ztbgsj, cjrbh, cjsj, czrbh, czsj)
+        values (#{gwbh},#{zzbm}, #{gwmc}, #{gwms}, #{gwytdm}, #{gwztdm}, #{ztbgsj}, #{cjrbh}, #{cjsj}, #{czrbh}, #{czsj})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update xt_gwxx
+        <set>
+            <if test="zzbm != null and zzbm != ''">
+                zzbm = #{zzbm},
+            </if>
+            <if test="gwmc != null and gwmc != ''">
+                gwmc = #{gwmc},
+            </if>
+            <if test="gwms != null and gwms != ''">
+                gwms = #{gwms},
+            </if>
+            <if test="gwytdm != null and gwytdm != ''">
+                gwytdm = #{gwytdm},
+            </if>
+            <if test="gwztdm != null and gwztdm != ''">
+                gwztdm = #{gwztdm},
+            </if>
+            <if test="ztbgsj != null">
+                ztbgsj = #{ztbgsj},
+            </if>
+            <if test="cjrbh != null and cjrbh != ''">
+                cjrbh = #{cjrbh},
+            </if>
+            <if test="cjsj != null">
+                cjsj = #{cjsj},
+            </if>
+            <if test="czrbh != null and czrbh != ''">
+                czrbh = #{czrbh},
+            </if>
+            <if test="czsj != null">
+                czsj = #{czsj},
+            </if>
+        </set>
+        where gwbh = #{gwbh}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from xt_gwxx where gwbh = #{gwbh}
+    </delete>
+
+</mapper>

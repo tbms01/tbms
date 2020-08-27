@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.newoxen.springcloud.tbms.auth.dao.XtCzyxxDao">
+
+    <resultMap type="com.newoxen.springcloud.tbms.auth.entity.XtCzyxx" id="XtCzyxxMap">
+        <result property="czybh" column="czybh" jdbcType="VARCHAR"/>
+        <result property="zzbm" column="zzbm" jdbcType="VARCHAR"/>
+        <result property="gwbh" column="gwbh" jdbcType="VARCHAR"/>
+        <result property="zzmc" column="zzmc" jdbcType="VARCHAR"/>
+        <result property="gwmc" column="gwmc" jdbcType="VARCHAR"/>
+        <result property="dlzh" column="dlzh" jdbcType="VARCHAR"/>
+        <result property="dlmm" column="dlmm" jdbcType="VARCHAR"/>
+        <result property="czygh" column="czygh" jdbcType="VARCHAR"/>
+        <result property="czymc" column="czymc" jdbcType="VARCHAR"/>
+        <result property="bgdhhm" column="bgdhhm" jdbcType="VARCHAR"/>
+        <result property="sjhm" column="sjhm" jdbcType="VARCHAR"/>
+        <result property="xbdm" column="xbdm" jdbcType="VARCHAR"/>
+        <result property="csrq" column="csrq" jdbcType="INTEGER"/>
+        <result property="zc" column="zc" jdbcType="VARCHAR"/>
+        <result property="zw" column="zw" jdbcType="VARCHAR"/>
+        <result property="dw" column="dw" jdbcType="VARCHAR"/>
+        <result property="dlmmycwcs" column="dlmmycwcs" jdbcType="INTEGER"/>
+        <result property="dlmmzdcwcs" column="dlmmzdcwcs" jdbcType="INTEGER"/>
+        <result property="wzkf" column="wzkf" jdbcType="INTEGER"/>
+        <result property="czyztdm" column="czyztdm" jdbcType="VARCHAR"/>
+        <result property="ztbgsj" column="ztbgsj" jdbcType="INTEGER"/>
+        <result property="cjrbh" column="cjrbh" jdbcType="VARCHAR"/>
+        <result property="cjsj" column="cjsj" jdbcType="INTEGER"/>
+        <result property="czrbh" column="czrbh" jdbcType="VARCHAR"/>
+        <result property="czsj" column="czsj" jdbcType="INTEGER"/>
+        <result property="email" column="email" jdbcType="VARCHAR"/>
+        <result property="avatar" column="avatar" jdbcType="OTHER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="XtCzyxxMap">
+        select
+        czybh,
+        (select zzmc from xt_zzxx WHERE zzbm=xt_czyxx.zzbm limit 1) zzmc, zzbm,
+        (select gwmc from xt_gwxx WHERE gwbh=xt_czyxx.gwbh limit 1) gwmc, gwbh,
+        dlzh, dlmm, czygh, czymc, bgdhhm, sjhm,
+        getDictName('xbdm', xbdm) as xbdm, csrq, zc, zw, dw, dlmmycwcs, dlmmzdcwcs, wzkf,
+        getDictName('czyztdm', czyztdm) as czyztdm, ztbgsj, cjrbh, cjsj, czrbh, czsj, email, avatar
+        from xt_czyxx
+        where czybh = #{czybh}
+    </select>
+
+
+
+    <!--根据登录账户查询数据-->
+    <select id="queryByLogin" resultMap="XtCzyxxMap">
+        select
+        czybh,
+        (select zzmc from xt_zzxx WHERE zzbm=xt_czyxx.zzbm limit 1) zzmc, zzbm,
+        (select gwmc from xt_gwxx WHERE gwbh=xt_czyxx.gwbh limit 1) gwmc, gwbh,
+        dlzh, dlmm, czygh, czymc, bgdhhm, sjhm,
+        getDictName('xbdm', xbdm) as xbdm, csrq, zc, zw, dw, dlmmycwcs, dlmmzdcwcs, wzkf,
+        getDictName('czyztdm', czyztdm) as czyztdm, ztbgsj, cjrbh, cjsj, czrbh, czsj, email, avatar
+        from xt_czyxx
+        where dlzh = #{dlzh}
+    </select>
+
+
+    <!--根据关键字过滤查询-->
+    <select id="queryAllByFilter" resultMap="XtCzyxxMap">
+        select
+        czybh,
+        (select zzmc from xt_zzxx WHERE zzbm=xt_czyxx.zzbm limit 1) zzmc, zzbm,
+        (select gwmc from xt_gwxx WHERE gwbh=xt_czyxx.gwbh limit 1) gwmc, gwbh,
+        dlzh, dlmm, czygh, czymc, bgdhhm, sjhm,
+        getDictName('xbdm', xbdm) as xbdm, csrq, zc, zw, dw, dlmmycwcs, dlmmzdcwcs, wzkf,
+        getDictName('czyztdm', czyztdm) as czyztdm, ztbgsj, cjrbh, cjsj, czrbh, czsj, email, avatar
+        from xt_czyxx
+        <where>
+            1 = 1
+            <if test="findtext != null and findtext != ''">
+                and (
+                czymc LIKE CONCAT('%','${findtext}','%') or
+                dlzh LIKE CONCAT('%','${findtext}','%') or
+                sjhm LIKE CONCAT('${findtext}','%')
+                )
+            </if>
+        </where>
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--根据关键字过滤查询-->
+    <select id="queryAllByFilterCount" resultType="java.lang.Integer">
+        select
+        count(*)
+        from xt_czyxx
+        <where>
+            1 = 1
+            <if test="findtext != null and findtext != ''">
+                and (
+                czymc LIKE CONCAT('%','${findtext}','%') or
+                dlzh LIKE CONCAT('%','${findtext}','%') or
+                sjhm LIKE CONCAT('${findtext}','%')
+                )
+            </if>
+        </where>
+    </select>
+
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="XtCzyxxMap">
+        select
+        czybh,
+        (select zzmc from xt_zzxx WHERE zzbm=xt_czyxx.zzbm limit 1) zzmc, zzbm,
+        (select gwmc from xt_gwxx WHERE gwbh=xt_czyxx.gwbh limit 1) gwmc, gwbh,
+        dlzh, dlmm, czygh, czymc, bgdhhm, sjhm,
+        getDictName('xbdm', xbdm) as xbdm, csrq, zc, zw, dw, dlmmycwcs, dlmmzdcwcs, wzkf,
+        getDictName('czyztdm', czyztdm) as czyztdm, ztbgsj, cjrbh, cjsj, czrbh, czsj, email, avatar
+        from xt_czyxx
+        <where>
+            <if test="czybh != null and czybh != ''">
+                and czybh = #{czybh}
+            </if>
+            <if test="zzbm != null and zzbm != ''">
+                and zzbm = #{zzbm}
+            </if>
+            <if test="gwbh != null and gwbh != ''">
+                and gwbh = #{gwbh}
+            </if>
+            <if test="dlzh != null and dlzh != ''">
+                and dlzh = #{dlzh}
+            </if>
+            <if test="dlmm != null and dlmm != ''">
+                and dlmm = #{dlmm}
+            </if>
+            <if test="czygh != null and czygh != ''">
+                and czygh = #{czygh}
+            </if>
+            <if test="czymc != null and czymc != ''">
+                and czymc = #{czymc}
+            </if>
+            <if test="bgdhhm != null and bgdhhm != ''">
+                and bgdhhm = #{bgdhhm}
+            </if>
+            <if test="sjhm != null and sjhm != ''">
+                and sjhm = #{sjhm}
+            </if>
+            <if test="xbdm != null and xbdm != ''">
+                and xbdm = #{xbdm}
+            </if>
+            <if test="csrq != null">
+                and csrq = #{csrq}
+            </if>
+            <if test="zc != null and zc != ''">
+                and zc = #{zc}
+            </if>
+            <if test="zw != null and zw != ''">
+                and zw = #{zw}
+            </if>
+            <if test="dw != null and dw != ''">
+                and dw = #{dw}
+            </if>
+            <if test="dlmmycwcs != null">
+                and dlmmycwcs = #{dlmmycwcs}
+            </if>
+            <if test="dlmmzdcwcs != null">
+                and dlmmzdcwcs = #{dlmmzdcwcs}
+            </if>
+            <if test="wzkf != null">
+                and wzkf = #{wzkf}
+            </if>
+            <if test="czyztdm != null and czyztdm != ''">
+                and czyztdm = #{czyztdm}
+            </if>
+            <if test="ztbgsj != null">
+                and ztbgsj = #{ztbgsj}
+            </if>
+            <if test="cjrbh != null and cjrbh != ''">
+                and cjrbh = #{cjrbh}
+            </if>
+            <if test="cjsj != null">
+                and cjsj = #{cjsj}
+            </if>
+            <if test="czrbh != null and czrbh != ''">
+                and czrbh = #{czrbh}
+            </if>
+            <if test="czsj != null">
+                and czsj = #{czsj}
+            </if>
+            <if test="email != null and email != ''">
+                and email = #{email}
+            </if>
+            <if test="avatar != null">
+                and avatar = #{avatar}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="czybh" useGeneratedKeys="true">
+        insert into xt_czyxx(czybh,zzbm, gwbh, dlzh, dlmm, czygh, czymc, bgdhhm, sjhm, xbdm, csrq, zc, zw, dw, dlmmycwcs, dlmmzdcwcs, wzkf, czyztdm, ztbgsj, cjrbh, cjsj, czrbh, czsj, email, avatar)
+        values (#{czybh},#{zzbm}, #{gwbh}, #{dlzh}, #{dlmm}, #{czygh}, #{czymc}, #{bgdhhm}, #{sjhm}, #{xbdm}, #{csrq}, #{zc}, #{zw}, #{dw}, #{dlmmycwcs}, #{dlmmzdcwcs}, #{wzkf}, #{czyztdm}, #{ztbgsj}, #{cjrbh}, #{cjsj}, #{czrbh}, #{czsj}, #{email}, #{avatar})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update xt_czyxx
+        <set>
+            <if test="zzbm != null and zzbm != ''">
+                zzbm = #{zzbm},
+            </if>
+            <if test="gwbh != null and gwbh != ''">
+                gwbh = #{gwbh},
+            </if>
+            <if test="dlzh != null and dlzh != ''">
+                dlzh = #{dlzh},
+            </if>
+            <if test="dlmm != null and dlmm != ''">
+                dlmm = #{dlmm},
+            </if>
+            <if test="czygh != null and czygh != ''">
+                czygh = #{czygh},
+            </if>
+            <if test="czymc != null and czymc != ''">
+                czymc = #{czymc},
+            </if>
+            <if test="bgdhhm != null and bgdhhm != ''">
+                bgdhhm = #{bgdhhm},
+            </if>
+            <if test="sjhm != null and sjhm != ''">
+                sjhm = #{sjhm},
+            </if>
+            <if test="xbdm != null and xbdm != ''">
+                xbdm = #{xbdm},
+            </if>
+            <if test="csrq != null">
+                csrq = #{csrq},
+            </if>
+            <if test="zc != null and zc != ''">
+                zc = #{zc},
+            </if>
+            <if test="zw != null and zw != ''">
+                zw = #{zw},
+            </if>
+            <if test="dw != null and dw != ''">
+                dw = #{dw},
+            </if>
+            <if test="dlmmycwcs != null">
+                dlmmycwcs = #{dlmmycwcs},
+            </if>
+            <if test="dlmmzdcwcs != null">
+                dlmmzdcwcs = #{dlmmzdcwcs},
+            </if>
+            <if test="wzkf != null">
+                wzkf = #{wzkf},
+            </if>
+            <if test="czyztdm != null and czyztdm != ''">
+                czyztdm = #{czyztdm},
+            </if>
+            <if test="ztbgsj != null">
+                ztbgsj = #{ztbgsj},
+            </if>
+            <if test="cjrbh != null and cjrbh != ''">
+                cjrbh = #{cjrbh},
+            </if>
+            <if test="cjsj != null">
+                cjsj = #{cjsj},
+            </if>
+            <if test="czrbh != null and czrbh != ''">
+                czrbh = #{czrbh},
+            </if>
+            <if test="czsj != null">
+                czsj = #{czsj},
+            </if>
+            <if test="email != null and email != ''">
+                email = #{email},
+            </if>
+            <if test="avatar != null">
+                avatar = #{avatar},
+            </if>
+        </set>
+        where czybh = #{czybh}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from xt_czyxx where czybh = #{czybh}
+    </delete>
+
+</mapper>

@@ -1,0 +1,44 @@
+server:
+  port: 12998
+  servlet:
+    session:
+      cookie:
+        name: OAUTH2-CLIENT-SESSIONID
+
+oauth2-service-url: http://localhost:12999
+
+spring:
+  application:
+    name: oauth2-sso-client
+  security:
+    user:
+      name: admin
+      password: 123456
+
+security:
+  oauth2:
+    client:
+      client-id: user-client
+      client-secret: user-client-tbms
+      user-authorization-uri: ${oauth2-service-url}/oauth/authorize
+      access-token-uri: ${oauth2-service-url}/oauth/token
+    resource:
+      id: user-client
+      user-info-uri: user-info
+      jwt:
+        key-uri: ${oauth2-service-url}/oauth/token_key
+        key-value: dev
+    authorization:
+      check-token-access:  ${oauth2-service-url}/oauth/check_token
+
+info:
+  app.name: tbms-authclient
+  company.name: www.newoxen.com
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://admin:123456@localhost:12000/eureka/eureka
+    instance:
+      instance-id: oauth-client
+      prefer-ip-address: true

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.newoxen.springcloud.tbms.admin.dao.XtJsxxDao">
+
+    <resultMap type="com.newoxen.springcloud.tbms.admin.entity.XtJsxx" id="XtJsxxMap">
+        <result property="jsbh" column="jsbh" jdbcType="VARCHAR"/>
+        <result property="jsbz" column="jsbz" jdbcType="VARCHAR"/>
+        <result property="sjjsbh" column="sjjsbh" jdbcType="VARCHAR"/>
+        <result property="ssxt" column="ssxt" jdbcType="VARCHAR"/>
+        <result property="jsmc" column="jsmc" jdbcType="VARCHAR"/>
+        <result property="jsms" column="jsms" jdbcType="VARCHAR"/>
+        <result property="jsytdm" column="jsytdm" jdbcType="VARCHAR"/>
+        <result property="ztbgsj" column="ztbgsj" jdbcType="INTEGER"/>
+        <result property="cjrbh" column="cjrbh" jdbcType="VARCHAR"/>
+        <result property="jsztdm" column="jsztdm" jdbcType="VARCHAR"/>
+        <result property="cjsj" column="cjsj" jdbcType="INTEGER"/>
+        <result property="czrbh" column="czrbh" jdbcType="VARCHAR"/>
+        <result property="czsj" column="czsj" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="XtJsxxMap">
+        select
+          jsbh, jsbz, sjjsbh, ssxt, jsmc, jsms, jsytdm, ztbgsj, cjrbh, jsztdm, cjsj, czrbh, czsj
+        from xt_jsxx
+        where jsbh = #{jsbh}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="XtJsxxMap">
+        select
+          jsbh, jsbz, sjjsbh, ssxt, jsmc, jsms, jsytdm, ztbgsj, cjrbh, jsztdm, cjsj, czrbh, czsj
+        from xt_jsxx
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--查询数据表总数据-->
+    <select id="queryCount" resultType="java.lang.Integer">
+        select
+        count(*)
+        from xt_jsxx
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="XtJsxxMap">
+        select
+        jsbh, jsbz, sjjsbh, ssxt, jsmc, jsms, jsytdm, ztbgsj, cjrbh, jsztdm, cjsj, czrbh, czsj
+        from xt_jsxx
+        <where>
+            <if test="jsbh != null and jsbh != ''">
+                and jsbh = #{jsbh}
+            </if>
+            <if test="jsbz != null and jsbz != ''">
+                and jsbz = #{jsbz}
+            </if>
+            <if test="sjjsbh != null and sjjsbh != ''">
+                and sjjsbh = #{sjjsbh}
+            </if>
+            <if test="ssxt != null and ssxt != ''">
+                and ssxt = #{ssxt}
+            </if>
+            <if test="jsmc != null and jsmc != ''">
+                and jsmc = #{jsmc}
+            </if>
+            <if test="jsms != null and jsms != ''">
+                and jsms = #{jsms}
+            </if>
+            <if test="jsytdm != null and jsytdm != ''">
+                and jsytdm = #{jsytdm}
+            </if>
+            <if test="ztbgsj != null">
+                and ztbgsj = #{ztbgsj}
+            </if>
+            <if test="cjrbh != null and cjrbh != ''">
+                and cjrbh = #{cjrbh}
+            </if>
+            <if test="jsztdm != null and jsztdm != ''">
+                and jsztdm = #{jsztdm}
+            </if>
+            <if test="cjsj != null">
+                and cjsj = #{cjsj}
+            </if>
+            <if test="czrbh != null and czrbh != ''">
+                and czrbh = #{czrbh}
+            </if>
+            <if test="czsj != null">
+                and czsj = #{czsj}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert">
+        insert into xt_jsxx(jsbh,jsbz, sjjsbh, ssxt, jsmc, jsms, jsytdm, ztbgsj, cjrbh, jsztdm, cjsj, czrbh, czsj)
+        values (#{jsbh},#{jsbz}, #{sjjsbh}, #{ssxt}, #{jsmc}, #{jsms}, #{jsytdm}, #{ztbgsj}, #{cjrbh}, #{jsztdm}, #{cjsj}, #{czrbh}, #{czsj})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update xt_jsxx
+        <set>
+            <if test="jsbz != null and jsbz != ''">
+                jsbz = #{jsbz},
+            </if>
+            <if test="sjjsbh != null and sjjsbh != ''">
+                sjjsbh = #{sjjsbh},
+            </if>
+            <if test="ssxt != null and ssxt != ''">
+                ssxt = #{ssxt},
+            </if>
+            <if test="jsmc != null and jsmc != ''">
+                jsmc = #{jsmc},
+            </if>
+            <if test="jsms != null and jsms != ''">
+                jsms = #{jsms},
+            </if>
+            <if test="jsytdm != null and jsytdm != ''">
+                jsytdm = #{jsytdm},
+            </if>
+            <if test="ztbgsj != null">
+                ztbgsj = #{ztbgsj},
+            </if>
+            <if test="cjrbh != null and cjrbh != ''">
+                cjrbh = #{cjrbh},
+            </if>
+            <if test="jsztdm != null and jsztdm != ''">
+                jsztdm = #{jsztdm},
+            </if>
+            <if test="cjsj != null">
+                cjsj = #{cjsj},
+            </if>
+            <if test="czrbh != null and czrbh != ''">
+                czrbh = #{czrbh},
+            </if>
+            <if test="czsj != null">
+                czsj = #{czsj},
+            </if>
+        </set>
+        where jsbh = #{jsbh}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from xt_jsxx where jsbh = #{jsbh}
+    </delete>
+
+</mapper>

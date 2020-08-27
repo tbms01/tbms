@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.newoxen.springcloud.tbms.admin.dao.XtDmDao">
+
+    <resultMap type="com.newoxen.springcloud.tbms.admin.entity.XtDm" id="XtDmMap">
+        <result property="dmbh" column="dmbh" jdbcType="VARCHAR"/>
+        <result property="sjdmbh" column="sjdmbh" jdbcType="VARCHAR"/>
+        <result property="dmlb" column="dmlb" jdbcType="VARCHAR"/>
+        <result property="dmflbm" column="dmflbm" jdbcType="VARCHAR"/>
+        <result property="dmflmc" column="dmflmc" jdbcType="VARCHAR"/>
+        <result property="dmbm" column="dmbm" jdbcType="VARCHAR"/>
+        <result property="dmmc" column="dmmc" jdbcType="VARCHAR"/>
+        <result property="xssxh" column="xssxh" jdbcType="INTEGER"/>
+        <result property="dmzt" column="dmzt" jdbcType="VARCHAR"/>
+        <result property="ztbgsj" column="ztbgsj" jdbcType="TIMESTAMP"/>
+        <result property="cjrbh" column="cjrbh" jdbcType="VARCHAR"/>
+        <result property="cjsj" column="cjsj" jdbcType="TIMESTAMP"/>
+        <result property="czrbh" column="czrbh" jdbcType="VARCHAR"/>
+        <result property="czsj" column="czsj" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--根据关键字过滤查询-->
+    <select id="queryAllByFilter" resultMap="XtDmMap">
+        select
+        dmbh, sjdmbh,
+        case dmlb when 0 then '系统代码' else '用户代码' end dmlb,
+        dmflbm, dmflmc, dmbm, dmmc, xssxh,
+        case dmzt when 0 then '正常' else '停用' end dmzt,
+        ztbgsj, cjrbh, cjsj, czrbh, czsj
+        from xt_dm
+        <where>
+            1 = 1
+            <if test="findtext != null and findtext != ''">
+                and (
+                dmmc LIKE CONCAT('%','${findtext}','%') or
+                dmflbm LIKE CONCAT('%','${findtext}','%') or
+                dmflmc LIKE CONCAT('${findtext}','%')
+                )
+            </if>
+        </where>
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--根据关键字过滤查询-->
+    <select id="queryAllByFilterCount" resultType="java.lang.Integer">
+        select
+        count(*)
+        from xt_dm
+        <where>
+            1 = 1
+            <if test="findtext != null and findtext != ''">
+                and (
+                dmmc LIKE CONCAT('%','${findtext}','%') or
+                dmflbm LIKE CONCAT('%','${findtext}','%') or
+                dmflmc LIKE CONCAT('${findtext}','%')
+                )
+            </if>
+        </where>
+    </select>
+
+
+    <!-- ================================================================================================== -->
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="XtDmMap">
+        select
+          dmbh, sjdmbh, dmlb, dmflbm, dmflmc, dmbm, dmmc, xssxh, dmzt, ztbgsj, cjrbh, cjsj, czrbh, czsj
+        from tbms.xt_dm
+        where dmbh = #{dmbh}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="XtDmMap">
+        select
+          dmbh, sjdmbh, dmlb, dmflbm, dmflmc, dmbm, dmmc, xssxh, dmzt, ztbgsj, cjrbh, cjsj, czrbh, czsj
+        from tbms.xt_dm
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="XtDmMap">
+        select
+          dmbh, sjdmbh, dmlb, dmflbm, dmflmc, dmbm, dmmc, xssxh, dmzt, ztbgsj, cjrbh, cjsj, czrbh, czsj
+        from tbms.xt_dm
+        <where>
+            <if test="dmbh != null and dmbh != ''">
+                and dmbh = #{dmbh}
+            </if>
+            <if test="sjdmbh != null and sjdmbh != ''">
+                and sjdmbh = #{sjdmbh}
+            </if>
+            <if test="dmlb != null and dmlb != ''">
+                and dmlb = #{dmlb}
+            </if>
+            <if test="dmflbm != null and dmflbm != ''">
+                and dmflbm = #{dmflbm}
+            </if>
+            <if test="dmflmc != null and dmflmc != ''">
+                and dmflmc = #{dmflmc}
+            </if>
+            <if test="dmbm != null and dmbm != ''">
+                and dmbm = #{dmbm}
+            </if>
+            <if test="dmmc != null and dmmc != ''">
+                and dmmc = #{dmmc}
+            </if>
+            <if test="xssxh != null">
+                and xssxh = #{xssxh}
+            </if>
+            <if test="dmzt != null and dmzt != ''">
+                and dmzt = #{dmzt}
+            </if>
+            <if test="ztbgsj != null">
+                and ztbgsj = #{ztbgsj}
+            </if>
+            <if test="cjrbh != null and cjrbh != ''">
+                and cjrbh = #{cjrbh}
+            </if>
+            <if test="cjsj != null">
+                and cjsj = #{cjsj}
+            </if>
+            <if test="czrbh != null and czrbh != ''">
+                and czrbh = #{czrbh}
+            </if>
+            <if test="czsj != null">
+                and czsj = #{czsj}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="dmbh" useGeneratedKeys="true">
+        insert into tbms.xt_dm(sjdmbh, dmlb, dmflbm, dmflmc, dmbm, dmmc, xssxh, dmzt, ztbgsj, cjrbh, cjsj, czrbh, czsj)
+        values (#{sjdmbh}, #{dmlb}, #{dmflbm}, #{dmflmc}, #{dmbm}, #{dmmc}, #{xssxh}, #{dmzt}, #{ztbgsj}, #{cjrbh}, #{cjsj}, #{czrbh}, #{czsj})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update tbms.xt_dm
+        <set>
+            <if test="sjdmbh != null and sjdmbh != ''">
+                sjdmbh = #{sjdmbh},
+            </if>
+            <if test="dmlb != null and dmlb != ''">
+                dmlb = #{dmlb},
+            </if>
+            <if test="dmflbm != null and dmflbm != ''">
+                dmflbm = #{dmflbm},
+            </if>
+            <if test="dmflmc != null and dmflmc != ''">
+                dmflmc = #{dmflmc},
+            </if>
+            <if test="dmbm != null and dmbm != ''">
+                dmbm = #{dmbm},
+            </if>
+            <if test="dmmc != null and dmmc != ''">
+                dmmc = #{dmmc},
+            </if>
+            <if test="xssxh != null">
+                xssxh = #{xssxh},
+            </if>
+            <if test="dmzt != null and dmzt != ''">
+                dmzt = #{dmzt},
+            </if>
+            <if test="ztbgsj != null">
+                ztbgsj = #{ztbgsj},
+            </if>
+            <if test="cjrbh != null and cjrbh != ''">
+                cjrbh = #{cjrbh},
+            </if>
+            <if test="cjsj != null">
+                cjsj = #{cjsj},
+            </if>
+            <if test="czrbh != null and czrbh != ''">
+                czrbh = #{czrbh},
+            </if>
+            <if test="czsj != null">
+                czsj = #{czsj},
+            </if>
+        </set>
+        where dmbh = #{dmbh}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from tbms.xt_dm where dmbh = #{dmbh}
+    </delete>
+
+</mapper>

@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.newoxen.springcloud.tbms.admin.dao.XtGnxxDao">
+
+    <resultMap type="com.newoxen.springcloud.tbms.admin.entity.XtGnxx" id="XtGnxxMap">
+        <result property="appid" column="appid" jdbcType="VARCHAR"/>
+        <result property="gnbh" column="gnbh" jdbcType="VARCHAR"/>
+        <result property="sjgnbh" column="sjgnbh" jdbcType="VARCHAR"/>
+        <result property="gnmc" column="gnmc" jdbcType="VARCHAR"/>
+        <result property="ssxt" column="ssxt" jdbcType="VARCHAR"/>
+        <result property="gnms" column="gnms" jdbcType="VARCHAR"/>
+        <result property="ysid" column="ysid" jdbcType="VARCHAR"/>
+        <result property="gnljdz" column="gnljdz" jdbcType="VARCHAR"/>
+        <result property="ljdzfjcs" column="ljdzfjcs" jdbcType="VARCHAR"/>
+        <result property="gnljfsdm" column="gnljfsdm" jdbcType="VARCHAR"/>
+        <result property="gnlxdm" column="gnlxdm" jdbcType="VARCHAR"/>
+        <result property="gnytdm" column="gnytdm" jdbcType="VARCHAR"/>
+        <result property="gntblmc" column="gntblmc" jdbcType="VARCHAR"/>
+        <result property="gntbljdz" column="gntbljdz" jdbcType="VARCHAR"/>
+        <result property="gnbbh" column="gnbbh" jdbcType="VARCHAR"/>
+        <result property="djmksxh" column="djmksxh" jdbcType="INTEGER"/>
+        <result property="mksxh" column="mksxh" jdbcType="INTEGER"/>
+        <result property="gnsxh" column="gnsxh" jdbcType="INTEGER"/>
+        <result property="czsxh" column="czsxh" jdbcType="INTEGER"/>
+        <result property="ycbz" column="ycbz" jdbcType="VARCHAR"/>
+        <result property="gnztdm" column="gnztdm" jdbcType="VARCHAR"/>
+        <result property="ztbgsj" column="ztbgsj" jdbcType="INTEGER"/>
+        <result property="cjrbh" column="cjrbh" jdbcType="VARCHAR"/>
+        <result property="cjsj" column="cjsj" jdbcType="INTEGER"/>
+        <result property="czrbh" column="czrbh" jdbcType="VARCHAR"/>
+        <result property="czsj" column="czsj" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="XtGnxxMap">
+        select
+          appid, gnbh, sjgnbh, gnmc, ssxt, gnms, ysid, gnljdz, ljdzfjcs, gnljfsdm, gnlxdm, gnytdm, gntblmc, gntbljdz, gnbbh, djmksxh, mksxh, gnsxh, czsxh, ycbz, gnztdm, ztbgsj, cjrbh, cjsj, czrbh, czsj
+        from xt_gnxx
+        where appid = #{appid}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="XtGnxxMap">
+        select
+          appid, gnbh, sjgnbh, gnmc, ssxt, gnms, ysid, gnljdz, ljdzfjcs, gnljfsdm, gnlxdm, gnytdm, gntblmc, gntbljdz, gnbbh, djmksxh, mksxh, gnsxh, czsxh, ycbz, gnztdm, ztbgsj, cjrbh, cjsj, czrbh, czsj
+        from xt_gnxx
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="XtGnxxMap">
+        select
+          appid, gnbh, sjgnbh, gnmc, ssxt, gnms, ysid, gnljdz, ljdzfjcs, gnljfsdm, gnlxdm, gnytdm, gntblmc, gntbljdz, gnbbh, djmksxh, mksxh, gnsxh, czsxh, ycbz, gnztdm, ztbgsj, cjrbh, cjsj, czrbh, czsj
+        from xt_gnxx
+        <where>
+            <if test="appid != null and appid != ''">
+                and appid = #{appid}
+            </if>
+            <if test="gnbh != null and gnbh != ''">
+                and gnbh = #{gnbh}
+            </if>
+            <if test="sjgnbh != null and sjgnbh != ''">
+                and sjgnbh = #{sjgnbh}
+            </if>
+            <if test="gnmc != null and gnmc != ''">
+                and gnmc = #{gnmc}
+            </if>
+            <if test="ssxt != null and ssxt != ''">
+                and ssxt = #{ssxt}
+            </if>
+            <if test="gnms != null and gnms != ''">
+                and gnms = #{gnms}
+            </if>
+            <if test="ysid != null and ysid != ''">
+                and ysid = #{ysid}
+            </if>
+            <if test="gnljdz != null and gnljdz != ''">
+                and gnljdz = #{gnljdz}
+            </if>
+            <if test="ljdzfjcs != null and ljdzfjcs != ''">
+                and ljdzfjcs = #{ljdzfjcs}
+            </if>
+            <if test="gnljfsdm != null and gnljfsdm != ''">
+                and gnljfsdm = #{gnljfsdm}
+            </if>
+            <if test="gnlxdm != null and gnlxdm != ''">
+                and gnlxdm = #{gnlxdm}
+            </if>
+            <if test="gnytdm != null and gnytdm != ''">
+                and gnytdm = #{gnytdm}
+            </if>
+            <if test="gntblmc != null and gntblmc != ''">
+                and gntblmc = #{gntblmc}
+            </if>
+            <if test="gntbljdz != null and gntbljdz != ''">
+                and gntbljdz = #{gntbljdz}
+            </if>
+            <if test="gnbbh != null and gnbbh != ''">
+                and gnbbh = #{gnbbh}
+            </if>
+            <if test="djmksxh != null">
+                and djmksxh = #{djmksxh}
+            </if>
+            <if test="mksxh != null">
+                and mksxh = #{mksxh}
+            </if>
+            <if test="gnsxh != null">
+                and gnsxh = #{gnsxh}
+            </if>
+            <if test="czsxh != null">
+                and czsxh = #{czsxh}
+            </if>
+            <if test="ycbz != null and ycbz != ''">
+                and ycbz = #{ycbz}
+            </if>
+            <if test="gnztdm != null and gnztdm != ''">
+                and gnztdm = #{gnztdm}
+            </if>
+            <if test="ztbgsj != null">
+                and ztbgsj = #{ztbgsj}
+            </if>
+            <if test="cjrbh != null and cjrbh != ''">
+                and cjrbh = #{cjrbh}
+            </if>
+            <if test="cjsj != null">
+                and cjsj = #{cjsj}
+            </if>
+            <if test="czrbh != null and czrbh != ''">
+                and czrbh = #{czrbh}
+            </if>
+            <if test="czsj != null">
+                and czsj = #{czsj}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="appid" useGeneratedKeys="true">
+        insert into xt_gnxx(sjgnbh, gnmc, ssxt, gnms, ysid, gnljdz, ljdzfjcs, gnljfsdm, gnlxdm, gnytdm, gntblmc, gntbljdz, gnbbh, djmksxh, mksxh, gnsxh, czsxh, ycbz, gnztdm, ztbgsj, cjrbh, cjsj, czrbh, czsj)
+        values (#{sjgnbh}, #{gnmc}, #{ssxt}, #{gnms}, #{ysid}, #{gnljdz}, #{ljdzfjcs}, #{gnljfsdm}, #{gnlxdm}, #{gnytdm}, #{gntblmc}, #{gntbljdz}, #{gnbbh}, #{djmksxh}, #{mksxh}, #{gnsxh}, #{czsxh}, #{ycbz}, #{gnztdm}, #{ztbgsj}, #{cjrbh}, #{cjsj}, #{czrbh}, #{czsj})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update xt_gnxx
+        <set>
+            <if test="sjgnbh != null and sjgnbh != ''">
+                sjgnbh = #{sjgnbh},
+            </if>
+            <if test="gnmc != null and gnmc != ''">
+                gnmc = #{gnmc},
+            </if>
+            <if test="ssxt != null and ssxt != ''">
+                ssxt = #{ssxt},
+            </if>
+            <if test="gnms != null and gnms != ''">
+                gnms = #{gnms},
+            </if>
+            <if test="ysid != null and ysid != ''">
+                ysid = #{ysid},
+            </if>
+            <if test="gnljdz != null and gnljdz != ''">
+                gnljdz = #{gnljdz},
+            </if>
+            <if test="ljdzfjcs != null and ljdzfjcs != ''">
+                ljdzfjcs = #{ljdzfjcs},
+            </if>
+            <if test="gnljfsdm != null and gnljfsdm != ''">
+                gnljfsdm = #{gnljfsdm},
+            </if>
+            <if test="gnlxdm != null and gnlxdm != ''">
+                gnlxdm = #{gnlxdm},
+            </if>
+            <if test="gnytdm != null and gnytdm != ''">
+                gnytdm = #{gnytdm},
+            </if>
+            <if test="gntblmc != null and gntblmc != ''">
+                gntblmc = #{gntblmc},
+            </if>
+            <if test="gntbljdz != null and gntbljdz != ''">
+                gntbljdz = #{gntbljdz},
+            </if>
+            <if test="gnbbh != null and gnbbh != ''">
+                gnbbh = #{gnbbh},
+            </if>
+            <if test="djmksxh != null">
+                djmksxh = #{djmksxh},
+            </if>
+            <if test="mksxh != null">
+                mksxh = #{mksxh},
+            </if>
+            <if test="gnsxh != null">
+                gnsxh = #{gnsxh},
+            </if>
+            <if test="czsxh != null">
+                czsxh = #{czsxh},
+            </if>
+            <if test="ycbz != null and ycbz != ''">
+                ycbz = #{ycbz},
+            </if>
+            <if test="gnztdm != null and gnztdm != ''">
+                gnztdm = #{gnztdm},
+            </if>
+            <if test="ztbgsj != null">
+                ztbgsj = #{ztbgsj},
+            </if>
+            <if test="cjrbh != null and cjrbh != ''">
+                cjrbh = #{cjrbh},
+            </if>
+            <if test="cjsj != null">
+                cjsj = #{cjsj},
+            </if>
+            <if test="czrbh != null and czrbh != ''">
+                czrbh = #{czrbh},
+            </if>
+            <if test="czsj != null">
+                czsj = #{czsj},
+            </if>
+        </set>
+        where appid = #{appid}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from xt_gnxx where appid = #{appid}
+    </delete>
+
+</mapper>

@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.newoxen.springcloud.tbms.admin.dao.XtCzjlDao">
+
+    <resultMap type="com.newoxen.springcloud.tbms.admin.entity.XtCzjl" id="XtCzjlMap">
+        <result property="czlsh" column="czlsh" jdbcType="INTEGER"/>
+        <result property="hhid" column="hhid" jdbcType="VARCHAR"/>
+        <result property="czybh" column="czybh" jdbcType="VARCHAR"/>
+        <result property="gnbh" column="gnbh" jdbcType="VARCHAR"/>
+        <result property="gnljdz" column="gnljdz" jdbcType="VARCHAR"/>
+        <result property="ljdzfjcs" column="ljdzfjcs" jdbcType="VARCHAR"/>
+        <result property="czkssj" column="czkssj" jdbcType="INTEGER"/>
+        <result property="czjssj" column="czjssj" jdbcType="INTEGER"/>
+        <result property="czjgdm" column="czjgdm" jdbcType="VARCHAR"/>
+        <result property="jgyyms" column="jgyyms" jdbcType="VARCHAR"/>
+        <result property="dqbm" column="dqbm" jdbcType="VARCHAR"/>
+        <result property="cjrbh" column="cjrbh" jdbcType="VARCHAR"/>
+        <result property="cjsj" column="cjsj" jdbcType="INTEGER"/>
+        <result property="czrbh" column="czrbh" jdbcType="VARCHAR"/>
+        <result property="czsj" column="czsj" jdbcType="INTEGER"/>
+        <result property="czdz" column="czdz" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="XtCzjlMap">
+        select
+          czlsh, hhid, czybh, gnbh, gnljdz, ljdzfjcs, czkssj, czjssj, czjgdm, jgyyms, dqbm, cjrbh, cjsj, czrbh, czsj, czdz
+        from xt_czjl
+        where czlsh = #{czlsh}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="XtCzjlMap">
+        select
+          czlsh, hhid, czybh, gnbh, gnljdz, ljdzfjcs, czkssj, czjssj, czjgdm, jgyyms, dqbm, cjrbh, cjsj, czrbh, czsj, czdz
+        from xt_czjl
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="XtCzjlMap">
+        select
+          czlsh, hhid, czybh, gnbh, gnljdz, ljdzfjcs, czkssj, czjssj, czjgdm, jgyyms, dqbm, cjrbh, cjsj, czrbh, czsj, czdz
+        from xt_czjl
+        <where>
+            <if test="czlsh != null">
+                and czlsh = #{czlsh}
+            </if>
+            <if test="hhid != null and hhid != ''">
+                and hhid = #{hhid}
+            </if>
+            <if test="czybh != null and czybh != ''">
+                and czybh = #{czybh}
+            </if>
+            <if test="gnbh != null and gnbh != ''">
+                and gnbh = #{gnbh}
+            </if>
+            <if test="gnljdz != null and gnljdz != ''">
+                and gnljdz = #{gnljdz}
+            </if>
+            <if test="ljdzfjcs != null and ljdzfjcs != ''">
+                and ljdzfjcs = #{ljdzfjcs}
+            </if>
+            <if test="czkssj != null">
+                and czkssj = #{czkssj}
+            </if>
+            <if test="czjssj != null">
+                and czjssj = #{czjssj}
+            </if>
+            <if test="czjgdm != null and czjgdm != ''">
+                and czjgdm = #{czjgdm}
+            </if>
+            <if test="jgyyms != null and jgyyms != ''">
+                and jgyyms = #{jgyyms}
+            </if>
+            <if test="dqbm != null and dqbm != ''">
+                and dqbm = #{dqbm}
+            </if>
+            <if test="cjrbh != null and cjrbh != ''">
+                and cjrbh = #{cjrbh}
+            </if>
+            <if test="cjsj != null">
+                and cjsj = #{cjsj}
+            </if>
+            <if test="czrbh != null and czrbh != ''">
+                and czrbh = #{czrbh}
+            </if>
+            <if test="czsj != null">
+                and czsj = #{czsj}
+            </if>
+            <if test="czdz != null and czdz != ''">
+                and czdz = #{czdz}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="czlsh" useGeneratedKeys="true">
+        insert into xt_czjl(hhid, czybh, gnbh, gnljdz, ljdzfjcs, czkssj, czjssj, czjgdm, jgyyms, dqbm, cjrbh, cjsj, czrbh, czsj, czdz)
+        values (#{hhid}, #{czybh}, #{gnbh}, #{gnljdz}, #{ljdzfjcs}, #{czkssj}, #{czjssj}, #{czjgdm}, #{jgyyms}, #{dqbm}, #{cjrbh}, #{cjsj}, #{czrbh}, #{czsj}, #{czdz})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update xt_czjl
+        <set>
+            <if test="hhid != null and hhid != ''">
+                hhid = #{hhid},
+            </if>
+            <if test="czybh != null and czybh != ''">
+                czybh = #{czybh},
+            </if>
+            <if test="gnbh != null and gnbh != ''">
+                gnbh = #{gnbh},
+            </if>
+            <if test="gnljdz != null and gnljdz != ''">
+                gnljdz = #{gnljdz},
+            </if>
+            <if test="ljdzfjcs != null and ljdzfjcs != ''">
+                ljdzfjcs = #{ljdzfjcs},
+            </if>
+            <if test="czkssj != null">
+                czkssj = #{czkssj},
+            </if>
+            <if test="czjssj != null">
+                czjssj = #{czjssj},
+            </if>
+            <if test="czjgdm != null and czjgdm != ''">
+                czjgdm = #{czjgdm},
+            </if>
+            <if test="jgyyms != null and jgyyms != ''">
+                jgyyms = #{jgyyms},
+            </if>
+            <if test="dqbm != null and dqbm != ''">
+                dqbm = #{dqbm},
+            </if>
+            <if test="cjrbh != null and cjrbh != ''">
+                cjrbh = #{cjrbh},
+            </if>
+            <if test="cjsj != null">
+                cjsj = #{cjsj},
+            </if>
+            <if test="czrbh != null and czrbh != ''">
+                czrbh = #{czrbh},
+            </if>
+            <if test="czsj != null">
+                czsj = #{czsj},
+            </if>
+            <if test="czdz != null and czdz != ''">
+                czdz = #{czdz},
+            </if>
+        </set>
+        where czlsh = #{czlsh}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from xt_czjl where czlsh = #{czlsh}
+    </delete>
+
+</mapper>

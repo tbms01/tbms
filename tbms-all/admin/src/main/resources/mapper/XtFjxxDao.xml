@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.newoxen.springcloud.tbms.admin.dao.XtFjxxDao">
+
+    <resultMap type="com.newoxen.springcloud.tbms.admin.entity.XtFjxx" id="XtFjxxMap">
+        <result property="fjbh" column="fjbh" jdbcType="VARCHAR"/>
+        <result property="zzbm" column="zzbm" jdbcType="VARCHAR"/>
+        <result property="fjmc" column="fjmc" jdbcType="VARCHAR"/>
+        <result property="fjml" column="fjml" jdbcType="VARCHAR"/>
+        <result property="fjlj" column="fjlj" jdbcType="VARCHAR"/>
+        <result property="downloadurl" column="downloadUrl" jdbcType="VARCHAR"/>
+        <result property="fjhzm" column="fjhzm" jdbcType="VARCHAR"/>
+        <result property="tjrbh" column="tjrbh" jdbcType="VARCHAR"/>
+        <result property="tjrmc" column="tjrmc" jdbcType="VARCHAR"/>
+        <result property="tjsj" column="tjsj" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="XtFjxxMap">
+        select
+          fjbh, zzbm, fjmc, fjml, fjlj, downloadUrl, fjhzm, tjrbh, tjrmc, tjsj
+        from tbms.xt_fjxx
+        where fjbh = #{fjbh}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="XtFjxxMap">
+        select
+          fjbh, zzbm, fjmc, fjml, fjlj, downloadUrl, fjhzm, tjrbh, tjrmc, tjsj
+        from tbms.xt_fjxx
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="XtFjxxMap">
+        select
+          fjbh, zzbm, fjmc, fjml, fjlj, downloadUrl, fjhzm, tjrbh, tjrmc, tjsj
+        from tbms.xt_fjxx
+        <where>
+            <if test="fjbh != null and fjbh != ''">
+                and fjbh = #{fjbh}
+            </if>
+            <if test="zzbm != null and zzbm != ''">
+                and zzbm = #{zzbm}
+            </if>
+            <if test="fjmc != null and fjmc != ''">
+                and fjmc = #{fjmc}
+            </if>
+            <if test="fjml != null and fjml != ''">
+                and fjml = #{fjml}
+            </if>
+            <if test="fjlj != null and fjlj != ''">
+                and fjlj = #{fjlj}
+            </if>
+            <if test="downloadurl != null and downloadurl != ''">
+                and downloadUrl = #{downloadurl}
+            </if>
+            <if test="fjhzm != null and fjhzm != ''">
+                and fjhzm = #{fjhzm}
+            </if>
+            <if test="tjrbh != null and tjrbh != ''">
+                and tjrbh = #{tjrbh}
+            </if>
+            <if test="tjrmc != null and tjrmc != ''">
+                and tjrmc = #{tjrmc}
+            </if>
+            <if test="tjsj != null">
+                and tjsj = #{tjsj}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="fjbh" useGeneratedKeys="true">
+        insert into tbms.xt_fjxx(zzbm, fjmc, fjml, fjlj, downloadUrl, fjhzm, tjrbh, tjrmc, tjsj)
+        values (#{zzbm}, #{fjmc}, #{fjml}, #{fjlj}, #{downloadurl}, #{fjhzm}, #{tjrbh}, #{tjrmc}, #{tjsj})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update tbms.xt_fjxx
+        <set>
+            <if test="zzbm != null and zzbm != ''">
+                zzbm = #{zzbm},
+            </if>
+            <if test="fjmc != null and fjmc != ''">
+                fjmc = #{fjmc},
+            </if>
+            <if test="fjml != null and fjml != ''">
+                fjml = #{fjml},
+            </if>
+            <if test="fjlj != null and fjlj != ''">
+                fjlj = #{fjlj},
+            </if>
+            <if test="downloadurl != null and downloadurl != ''">
+                downloadUrl = #{downloadurl},
+            </if>
+            <if test="fjhzm != null and fjhzm != ''">
+                fjhzm = #{fjhzm},
+            </if>
+            <if test="tjrbh != null and tjrbh != ''">
+                tjrbh = #{tjrbh},
+            </if>
+            <if test="tjrmc != null and tjrmc != ''">
+                tjrmc = #{tjrmc},
+            </if>
+            <if test="tjsj != null">
+                tjsj = #{tjsj},
+            </if>
+        </set>
+        where fjbh = #{fjbh}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from tbms.xt_fjxx where fjbh = #{fjbh}
+    </delete>
+
+</mapper>
